@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create/Load Session Save - Mini Game Thing!</title>
+    <link rel="stylesheet" href="../styles/styles.css"> <!-- Main styles for consistency -->
+    <link rel="stylesheet" href="../styles/createSave.css">
+</head>
+<body>
+    <div class="page-controls-standalone">
+        <a href="../index.html" class="back-button-global">&laquo; Back to Main Page</a>
+    </div>
+
+    <div class="save-manager-container">
+        <header class="content-header">
+            <h1>Manage Session Save</h1>
+            <p>Data saved here will be available as long as this browser tab is open. It will be cleared if you close the tab or browser.</p>
+        </header>
+
+        <main class="save-form-area">
+            <div class="input-group">
+                <label for="playerNameInput">Enter Player Name:</label>
+                <input type="text" id="playerNameInput" placeholder="E.g., BaristaKing">
+            </div>
+             <div class="input-group">
+                <label for="playerScoreInput">Enter Current Score (Optional):</label>
+                <input type="number" id="playerScoreInput" placeholder="E.g., 1000">
+            </div>
+
+            <div class="button-group">
+                <button id="saveButton" class="action-button save-button">Save Data</button>
+                <button id="loadButton" class="action-button load-button">Load Data</button>
+                <button id="clearButton" class="action-button clear-button">Clear Saved Data</button>
+            </div>
+
+            <div id="saveDataDisplay" class="display-area">
+                No data loaded or action performed yet.
+            </div>
+        </main>
+
+        <footer class="content-footer">
+            <p>Save data is stored locally in your browser's session.</p>
+        </footer>
+    </div>
+
+    <script src="saves/saveManager.js"></script>
+</body>
+</html>
