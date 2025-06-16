@@ -7,9 +7,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const saveButton = document.getElementById('saveButton');
     const loadButton = document.getElementById('loadButton');
     const clearButton = document.getElementById('clearButton');
+    const startGameButton = document.getElementById('startGameButton'); // New button
     const saveDataDisplay = document.getElementById('saveDataDisplay');
     
-    // New file handling elements
+    // File handling elements
     const fileDropArea = document.getElementById('fileDropArea');
     const fileInput = document.getElementById('fileInput');
     const fileSelectButton = document.getElementById('fileSelectButton');
@@ -17,6 +18,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadFromPasteButton = document.getElementById('loadFromPasteButton');
 
     const COFFEE_SHOP_SAVE_KEY = 'coffeeShopGameSaveData';
+
+    // Function to check if we have valid player data and enable/disable Start Game button
+    function updateStartGameButton() {
+        const playerName = playerNameInput.value.trim();
+        const hasValidData = playerName.length > 0;
+        
+        if (startGameButton) {
+            startGameButton.disabled = !hasValidData;
+        }
+    }
 
     // Function to display messages or data
     function displayData(message, type = 'info') {
@@ -57,11 +68,11 @@ document.addEventListener('DOMContentLoaded', function() {
             playerNameInput.value = saveData.playerName || '';
             playerScoreInput.value = saveData.playerScore || '';
             
-            // Also save to session storage
+            // Save to session storage
             sessionStorage.setItem(COFFEE_SHOP_SAVE_KEY, JSON.stringify(saveData));
             
             displayData(saveData, 'json');
-            displayData('Save data loaded successfully!', 'success');
+            updateStartGameButton(); // Check if Start Game should be enabled
         } catch (e) {
             displayData('Error loading save data into form.', 'error');
             console.error('Error loading save data:', e);
@@ -104,6 +115,7 @@ document.addEventListener('DOMContentLoaded', function() {
             downloadJSON(saveData, filename);
             
             displayData(`Save successful! File "${filename}" downloaded and stored in session.`, 'success');
+            updateStartGameButton(); // Enable Start Game button
         } catch (e) {
             displayData('Error saving data.', 'error');
             console.error("Error saving data:", e);
@@ -119,6 +131,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 displayData(loadedData, 'json');
                 playerNameInput.value = loadedData.playerName || '';
                 playerScoreInput.value = loadedData.playerScore || '';
+                updateStartGameButton(); // Check if Start Game should be enabled
             } catch (e) {
                 displayData('Error parsing saved data from session.', 'error');
                 console.error("Error parsing JSON from sessionStorage:", e);
@@ -134,6 +147,31 @@ document.addEventListener('DOMContentLoaded', function() {
         displayData('Session save data cleared.', 'success');
         playerNameInput.value = '';
         playerScoreInput.value = '';
+        updateStartGameButton(); // Disable Start Game button
+    }
+
+    // Function to start the game
+    function startGame() {
+        const playerName = playerNameInput.value.trim();
+        if (!playerName) {
+            displayData('Please enter a player name before starting the game.', 'error');
+            return;
+        }
+
+        // Ensure current data is saved to session before starting game
+        const playerScore = parseInt(playerScoreInput.value, 10) || 0;
+        const saveData = {
+            playerName: playerName,
+            playerScore: playerScore,
+            lastSaved: new Date().toISOString(),
+            gameType: 'coffeeShop',
+            version: '1.0'
+        };
+        
+        sessionStorage.setItem(COFFEE_SHOP_SAVE_KEY, JSON.stringify(saveData));
+        
+        // Navigate to the coffee shop game
+        window.location.href = 'coffeeshopGame.html';
     }
 
     // Function to handle file reading
@@ -191,6 +229,17 @@ document.addEventListener('DOMContentLoaded', function() {
     if (clearButton) {
         clearButton.addEventListener('click', clearData);
     }
+    if (startGameButton) {
+        startGameButton.addEventListener('click', startGame);
+    }
+
+    // Input change listeners to update Start Game button state
+    if (playerNameInput) {
+        playerNameInput.addEventListener('input', updateStartGameButton);
+    }
+    if (playerScoreInput) {
+        playerScoreInput.addEventListener('input', updateStartGameButton);
+    }
 
     // File selection button
     if (fileSelectButton) {
@@ -227,7 +276,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
 
-        // Click to select file
         fileDropArea.addEventListener('click', () => fileInput.click());
     }
 
@@ -236,6 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loadFromPasteButton.addEventListener('click', loadFromPaste);
     }
 
-    // Initial message
+    // Initial setup
     displayData('Enter player details and save. Load to retrieve.', 'info');
+    updateStartGameButton(); // Set initial state of Start Game button
 });
