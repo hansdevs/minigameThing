@@ -1,5 +1,5 @@
 body {
-    background-color: #f4eade; /* Same warm background as coffee shop */
+    background-color: #f4eade;
     color: #4a3b31;
     font-family: 'Georgia', serif;
     display: flex;
@@ -14,7 +14,7 @@ body {
 
 .page-controls-standalone {
     width: 100%;
-    max-width: 700px;
+    max-width: 800px; /* Increased for wider layout */
     display: flex;
     justify-content: center;
     margin-bottom: 20px;
@@ -44,13 +44,13 @@ body {
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     text-align: center;
-    max-width: 700px;
+    max-width: 800px; /* Increased for wider layout */
     width: 100%;
     overflow: hidden;
 }
 
 .content-header {
-    background-color: #343a40; /* Dark header like coffee shop */
+    background-color: #343a40;
     color: white;
     padding: 30px 40px;
     text-align: center;
@@ -78,7 +78,7 @@ body {
 .form-layout {
     display: flex;
     align-items: flex-start;
-    gap: 30px;
+    gap: 25px;
     margin-bottom: 30px;
     flex-wrap: wrap;
 }
@@ -100,17 +100,17 @@ body {
     margin-bottom: 8px;
     font-weight: bold;
     color: #4a5568;
-    font-size: 1em;
+    font-size: 0.95em;
 }
 
 .input-group input[type="text"],
 .input-group input[type="number"] {
     width: 100%;
-    padding: 12px;
+    padding: 10px 12px;
     border: 1px solid #d4c0a1;
     border-radius: 5px;
     box-sizing: border-box;
-    font-size: 1em;
+    font-size: 0.95em;
     background-color: #fff;
 }
 
@@ -124,31 +124,31 @@ body {
 .button-section {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 8px;
     align-items: center;
-    min-width: 150px;
+    min-width: 120px;
 }
 
 .action-button {
     border: none;
-    padding: 12px 25px;
-    font-size: 1em;
-    font-weight: bold;
-    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 0.9em;
+    font-weight: 600;
+    border-radius: 6px;
     cursor: pointer;
     transition: background-color 0.3s ease, transform 0.2s ease;
     color: white;
-    width: 160px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    width: 120px; /* Slightly wider for "Save & Download" */
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .action-button:hover {
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
 
 .action-button:active {
     transform: translateY(0px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .save-button {
@@ -173,17 +173,18 @@ body {
 }
 
 .display-area {
-    padding: 20px;
+    padding: 15px;
     background-color: #f7fafc;
     border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    min-height: 80px;
+    border-radius: 6px;
+    min-height: 60px;
     text-align: left;
     color: #4a5568;
-    line-height: 1.6;
+    line-height: 1.5;
     word-wrap: break-word;
     flex: 1;
     min-width: 250px;
+    font-size: 0.95em;
 }
 
 .display-area .success {
@@ -201,11 +202,112 @@ body {
     word-wrap: break-word;
     margin: 0;
     font-family: 'Courier New', monospace;
+    font-size: 0.85em;
+}
+
+/* New Load Section Styles */
+.load-section {
+    border-top: 2px solid #e2e8f0;
+    padding-top: 30px;
+    margin-top: 20px;
+}
+
+.load-section h3 {
+    color: #4a5568;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+}
+
+.load-options {
+    display: flex;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.file-upload-area {
+    flex: 1;
+    min-width: 250px;
+    border: 2px dashed #cbd5e0;
+    border-radius: 8px;
+    padding: 30px 20px;
+    text-align: center;
+    background-color: #f7fafc;
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+    cursor: pointer;
+}
+
+.file-upload-area:hover {
+    border-color: #8c7851;
+    background-color: #fdfaf6;
+}
+
+.file-upload-area.drag-over {
+    border-color: #48bb78;
+    background-color: #f0fff4;
+}
+
+.upload-content p {
+    margin: 5px 0;
+    color: #4a5568;
+}
+
+.file-select-button {
+    background-color: #4299e1;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
     font-size: 0.9em;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.file-select-button:hover {
+    background-color: #3182ce;
+}
+
+.paste-area {
+    flex: 1;
+    min-width: 250px;
+    text-align: left;
+}
+
+.paste-area label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #4a5568;
+    font-size: 0.95em;
+}
+
+.paste-area textarea {
+    width: 100%;
+    height: 120px;
+    padding: 12px;
+    border: 1px solid #d4c0a1;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 0.85em;
+    font-family: 'Courier New', monospace;
+    resize: vertical;
+    background-color: #fff;
+}
+
+.paste-area textarea:focus {
+    outline: none;
+    border-color: #8c7851;
+    box-shadow: 0 0 0 2px rgba(140, 120, 81, 0.2);
+}
+
+.paste-area button {
+    margin-top: 10px;
+    width: auto;
+    min-width: 140px;
 }
 
 .content-footer {
-    background-color: #343a40; /* Dark footer like coffee shop */
+    background-color: #343a40;
     color: #adb5bd;
     padding: 20px 40px;
     text-align: center;
@@ -216,14 +318,23 @@ body {
     color: #adb5bd;
     margin: 0;
 }
+
+/* Responsive adjustments */
 @media (max-width: 768px) {
-    .form-layout {
+    .form-layout, .load-options {
         flex-direction: column;
+        gap: 20px;
     }
     
     .button-section {
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
+        gap: 10px;
+    }
+    
+    .action-button {
+        width: auto;
+        min-width: 100px;
     }
 }
